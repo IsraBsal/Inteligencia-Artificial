@@ -78,11 +78,11 @@ cola=deque([estado])
 #Empieza la bsuqueda--------------
 while(test==0):
         #print("Tam del arreglo de padres",len(padre))
-        print("EL arreglo de padres",padre)
-        print("Valores de cola",cola)
+        #print("EL arreglo de padres",padre)
+        #print("Valores de cola",cola)
 
         if(len(padre)==0):
-            print("Entre a que el tamano de padres es 0, entro con valor de cola en", cola[0])
+           # print("Entre a que el tamano de padres es 0, entro con valor de cola en", cola[0])
             nodo=Nodo(cola[0])
             nodo.costo=0
             nodo.profundidad=0
@@ -104,11 +104,11 @@ while(test==0):
 
         else:
             if(cola[0]==0):
-                print("if de estaciones 0")
+               # print("if de estaciones 0")
                 cola.popleft()
                 padre.popleft()
             else:
-                print("Else de estaciones !=0, entro con valor de cola en", cola[0])
+               # print("Else de estaciones !=0, entro con valor de cola en", cola[0])
                 nodo=Nodo(cola[0])
                 nodo.costo=nodos[padre[0]].costo+1
                 nodo.padre=padre[0]
@@ -136,11 +136,11 @@ while(test==0):
                 #Actualizo la cola
                 cola.append(vecinos_arr[0])
                 cola.append(vecinos_arr[1])
-                print("Cola actualizada: ",cola)
+              #  print("Cola actualizada: ",cola)
                 #Actualizo el padre
                 padre.append(nodo.num_nodo)
                 padre.append(nodo.num_nodo)
-                print("Padres actualizados: ",padre)
-                print("NOdos creados",len(nodos))
+              #  print("Padres actualizados: ",padre)
+               # print("NOdos creados",len(nodos))
 
 nodos[len(nodos)-1].imprime_atributos()
