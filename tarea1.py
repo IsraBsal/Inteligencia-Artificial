@@ -1,4 +1,3 @@
-#comenzamos declarando nuestra clase Nodo para guardar los atributos
 #Clase----------------------------------------------------
 class Nodo:
     def __init__(self,estado):
@@ -49,40 +48,35 @@ def vecinos(estado): #Devuelve los vecinos de una estacion
 
 #-------------------------------------
 
-from collections import deque
-#Main----------------------------------------------------------------------------------------------------
 
+#Main----------------------------------------------------------------------------------------------------
+from collections import deque
 
 print("Bienvenido")
-estado=int(input("Teclea el numero correspondiente a la estacion en la que te encuentras"))
-destino=int(input("Teclea el numero correspondiente a la estacion a la que quieres llegar"))
+estado=int(input("Teclea el numero correspondiente a la estacion en la que te encuentras \n"))
+destino=int(input("Teclea el numero correspondiente a la estacion a la que quieres llegar \n"))
 
-#Creamos el primer nodo e inicializamos sus atributos
 
-#nodo=Nodo(estado,0,0,camino0,0)
+
+#Logica para empezar la busqueda
 test=0
-
 if(estado==destino):
     test=1
 else:
     test=0
+#----------------------------------
 
-#nodo.imprime_atributos()
-#------------------------
-
+#Creamos los arreglos de la sugerencia
 padre=deque([])
 cola=deque([estado])
+#-------------------------------------
 
 
-#print(nodos)
-#Empieza la bsuqueda--------------
+#Empieza la busqueda------------------
 while(test==0):
-        #print("Tam del arreglo de padres",len(padre))
-        #print("EL arreglo de padres",padre)
-        #print("Valores de cola",cola)
-
+        #Para crear el primer nodo de la busqueda
         if(len(padre)==0):
-           # print("Entre a que el tamano de padres es 0, entro con valor de cola en", cola[0])
+           #Inicializando todos los atributos
             nodo=Nodo(cola[0])
             nodo.costo=0
             nodo.profundidad=0
@@ -91,11 +85,13 @@ while(test==0):
             nodo.test=test
             nodo.num_nodo=0
             nodos=deque([nodo])
-            #print("Primer camino",nodos[0].camino)
-            nodos[len(nodos)-1].imprime_atributos()#Imprimo el primer nodo
+            #Imprimo el primer nodo
+            nodos[len(nodos)-1].imprime_atributos()
             print("")
-            vecinos_arr=vecinos(nodo.estado)#Busca los vecinos del nodo generado
-            cola.popleft()#Saco al primer elemento
+            #Busca los vecinos del nodo generado
+            vecinos_arr=vecinos(nodo.estado)
+            #Saco al primer elemento
+            cola.popleft()
             #Actualizo la cola
             cola.append(vecinos_arr[0])
             cola.append(vecinos_arr[1])
@@ -106,45 +102,46 @@ while(test==0):
 
         else:
             if(cola[0]==0):
-               # print("if de estaciones 0")
+               # print("if de estaciones 0") Si entra en este if quiere decir que en la cola habia una estacion que no existe en la linea 
                 cola.popleft()
                 padre.popleft()
             else:
-               # print("Else de estaciones !=0, entro con valor de cola en", cola[0])
+               # Creacion de nodo (Se llenan los atributos del nodo)
                 nodo=Nodo(cola[0])
                 nodo.costo=nodos[padre[0]].costo+1
                 nodo.padre=padre[0]
                 nodo.profundidad=nodos[padre[0]].profundidad+1
-                #-------
                 estado=cola[0]
                 camino_padre=[nodos[padre[0]].camino]
                 camino_padre.append(estado)
                 #n=len(camino_padre)
                 #camino_padre.insert(n-1,cola[0])
                 nodo.camino=camino_padre
-                #-------
                 #print("",camino_padre)
                 if(nodo.estado==destino):
                     nodo.test=1
                     test=1
                 else:
                     nodo.test=0
-                nodo.num_nodo=len(nodos) #Aqui modifique
+                nodo.num_nodo=len(nodos) 
                 nodos.append(nodo)
-                nodos[len(nodos)-1].imprime_atributos()#Imprimimos cada nodo por nivel
+                #Imprimimos cada nodo por nivel
+                nodos[len(nodos)-1].imprime_atributos()
                 print("")
+                #Busca los vecinos del nodo generado
                 vecinos_arr=vecinos(nodo.estado)
+                #Saco al elemento de la cola que atendi
                 cola.popleft()
                 padre.popleft()
                 #Actualizo la cola
                 cola.append(vecinos_arr[0])
                 cola.append(vecinos_arr[1])
-              #  print("Cola actualizada: ",cola)
+                #print("Cola actualizada: ",cola)
                 #Actualizo el padre
                 padre.append(nodo.num_nodo)
                 padre.append(nodo.num_nodo)
-              #  print("Padres actualizados: ",padre)
-               # print("NOdos creados",len(nodos))
+                #print("Padres actualizados: ",padre)
+                #print("NOdos creados",len(nodos))
 
 print("")
 print("")
