@@ -92,7 +92,9 @@ while(test==0):
             nodo.num_nodo=0
             nodos=deque([nodo])
             #print("Primer camino",nodos[0].camino)
-            vecinos_arr=vecinos(nodo.estado)
+            nodos[len(nodos)-1].imprime_atributos()#Imprimo el primer nodo
+            print("")
+            vecinos_arr=vecinos(nodo.estado)#Busca los vecinos del nodo generado
             cola.popleft()#Saco al primer elemento
             #Actualizo la cola
             cola.append(vecinos_arr[0])
@@ -121,7 +123,6 @@ while(test==0):
                 #camino_padre.insert(n-1,cola[0])
                 nodo.camino=camino_padre
                 #-------
-
                 #print("",camino_padre)
                 if(nodo.estado==destino):
                     nodo.test=1
@@ -130,6 +131,8 @@ while(test==0):
                     nodo.test=0
                 nodo.num_nodo=len(nodos) #Aqui modifique
                 nodos.append(nodo)
+                nodos[len(nodos)-1].imprime_atributos()#Imprimimos cada nodo por nivel
+                print("")
                 vecinos_arr=vecinos(nodo.estado)
                 cola.popleft()
                 padre.popleft()
@@ -143,4 +146,8 @@ while(test==0):
               #  print("Padres actualizados: ",padre)
                # print("NOdos creados",len(nodos))
 
-nodos[len(nodos)-1].imprime_atributos()
+print("")
+print("")
+print("")
+#print("Numero de nodos generados",len(nodos))
+print("El camino es ",nodos[len(nodos)-1].camino)
