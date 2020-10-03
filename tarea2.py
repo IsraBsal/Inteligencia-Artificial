@@ -4,8 +4,9 @@ import numpy as np
 import time
 
 start_time = time.time() #Para calcular el tiempo
+
 #Paso 1 solucion inicial aleatoria
-SolActual=np.array([random.uniform(-500,500),random.uniform(-500,500)]) #Mejorar con unifor(a,b),N) donde N es el numero de digitos del punto a al deracha
+SolActual=np.array([random.uniform(-500,500),random.uniform(-500,500)]) 
 #--------------------------------- 
 
 #Paso 2 Crear un funcion objetivo (Es la funcion que va evaluar en las dos coordenadas x,y)
@@ -56,19 +57,20 @@ def vecindario(SolActual,epsilon): #Refresa un arreglo de tamano 2, contiene las
 #Comienza Main----------------------------------------------------------------------
 
 #Mostramos las coordenadas generadas por SolActual
-print("Arreglo que contiene las cordenadas de la solucion actual",SolActual)
-epsilon=1000
+#print("Arreglo que contiene las cordenadas de la solucion actual",SolActual)
+epsilon=400
 CostoVecina=0
 #Calculamos el costo de SolActual
 CostoActual=funcion_Objetivo(SolActual)
-print("Costo actual= ",CostoActual)
+#print("Costo actual= ",CostoActual)
 
 #Contadores
 SinMejora=0
 Ciclos=0
 
 
-while(SinMejora<1000 and Ciclos<10000): #Ciclos se le puede dar mas tiempo y la corrida no debe tardar mas de 30 segundos
+
+while(SinMejora<500000 and Ciclos<400000): #Ciclos se le puede dar mas tiempo y la corrida no debe tardar mas de 30 segundos
     Ciclos+=1
     #Generamos la solucion vecina
     SolVecina=vecindario(SolActual,epsilon)
@@ -85,7 +87,7 @@ while(SinMejora<1000 and Ciclos<10000): #Ciclos se le puede dar mas tiempo y la 
     else:
         SinMejora+=1
 
-print("El mejor costo fue= ",CostoActual)
-print("Ciclos=",Ciclos)
-print("SinMejora=",SinMejora)
-print("--- %s seconds ---" % (time.time() - start_time))
+print("El mejor costo fue= ",round(CostoActual,4))
+#print("Ciclos=",Ciclos)
+#print("SinMejora=",SinMejora)
+print("Tiempo de ejecucion %s seconds" %round((time.time() - start_time),1) )
