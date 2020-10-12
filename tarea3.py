@@ -52,7 +52,7 @@ def vecindario(SolActual,epsilon): #Regresa un arreglo de tamano 2, contiene las
 
 #Mostramos las coordenadas generadas por SolActual
 #print("Arreglo que contiene las cordenadas de la solucion actual",SolActual)
-epsilon=10
+epsilon=2
 CostoVecina=0
 MejorCosto=0
 #print("Costo actual= ",CostoActual)
@@ -71,29 +71,32 @@ CostoActual=funcion_Objetivo(SolActual) #Calculamos el costo de SolActual
 MejorSol=SolActual
 MejorCosto=CostoActual
 Temp=TIinicial
-
-
-
-
-
-while(SinMejora<500000 and Ciclos<400000): #Ciclos se le puede dar mas tiempo y la corrida no debe tardar mas de 30 segundos
-    Ciclos+=1
-    #Generamos la solucion vecina
-    SolVecina=vecindario(SolActual,epsilon)
-    #print("Solucion vecina ",SolVecina)
-    #Evaluamos costo vecina
-    CostoVecina=funcion_Objetivo(SolVecina)
-    if(CostoVecina<=CostoActual):
-        CostoActual=CostoVecina
-        SolActual=SolVecina
+i=0
+while Temp>TFinal:
+    while i<Iter:
+        SolVecina=vecindario(SolActual,epsilon)
+        CostoVecina=funcion_Objetivo(SolVecina)
         if(CostoVecina<CostoActual):
-            SinMejora=0
+            CostoActual=CostoVecina
+            SolActual=SolVecina
+            if(CostoVecina<MejorCosto):
+                MejorCosto=CostoVecina
+                MejorSol=SolVecina
         else:
-            SinMejora+=1
-    else:
-        SinMejora+=1
+            u=random.uniform(0,1)
+            b=math.exp(-1*((CostoVecina-CostoActual)/Temp))
+            if(u<b):
+                CostoActual=CostoVecina
+                SolActual=SolVecina
+        i=i+1
+    Temp=Temp*alfa
+   
 
-print("El mejor costo fue= ",round(CostoActual,4))
+
+
+
+print("El mejor costo fue: ",round(CostoActual,4))
+print("La solucion encontrada fue: ",SolActual)
 #print("Ciclos=",Ciclos)
 #print("SinMejora=",SinMejora)
-print("Tiempo de ejecucion %s seconds" %round((time.time() - start_time),1) )
+print("Tiempo de ejecucion %s seconds" %round((time.time() - start_time),1) ) 
