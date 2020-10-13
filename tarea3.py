@@ -6,7 +6,6 @@ import time
 start_time = time.time() #Para calcular el tiempo
 
 #funcion objetivo (Es la funcion que va evaluar en las dos coordenadas x,y)
-
 def funcion_Objetivo(solucion):
     x=solucion[0] #a
     y=solucion[1] #b
@@ -14,7 +13,6 @@ def funcion_Objetivo(solucion):
     f=418.9829*2-x*math.sin(math.sqrt(abs(x)))-y*math.sin(math.sqrt(abs(y)))
 
     return f
-
 #-------------------------------------------------------------------------------
 
 #Definir el vecindario----------------------------------------------------
@@ -45,23 +43,20 @@ def vecindario(SolActual,epsilon): #Regresa un arreglo de tamano 2, contiene las
 #---------------------------------------------------------------------------------
 
 
-#Variables requeridas
-# SolActual y SolVecina son vectores en R2 floats   
 
 #Comienza Main----------------------------------------------------------------------
-
 #Mostramos las coordenadas generadas por SolActual
 #print("Arreglo que contiene las cordenadas de la solucion actual",SolActual)
-epsilon=2
+epsilon=20
 CostoVecina=0
 MejorCosto=0
 #print("Costo actual= ",CostoActual)
 
 #Nuevas variables (Sirven como contadores)
-TIinicial=100 #Float
-TFinal=0.001 #Float
-alfa=0.95 #Float
-Iter=110 #Int 
+TIinicial=1000000 #Float
+TFinal=0.000001 #Float
+alfa=0.99 #Float el factor que menos se mueve
+Iter=2000000 #Int 
 
 
 #Comienza la busqueda
@@ -88,7 +83,7 @@ while Temp>TFinal:
             if(u<b):
                 CostoActual=CostoVecina
                 SolActual=SolVecina
-        i=i+1
+        i+=1
     Temp=Temp*alfa
    
 
