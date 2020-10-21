@@ -44,4 +44,33 @@ def generar_Mutante(p,i,j,k):
     p2=np.array([p[j][0],p[j][1]])
     p3=np.array([p[k][0],p[k][1]])
     #-----------------------------
+    
+    F=0.5
+
+    #Calculamos las coordenadas del mutante
+    Mutante=np.zeros((2))
+    Mutante[0]=p1[0]+F*(p2[0]-p3[0])
+    Mutante[1]=p1[1]+F*(p2[1]-p3[1])
+    #-------------------------------------
+
+    #Reflejando para comprobar que nuestro Solucion mutante esta dentro del rango
+    if (Mutante[0]>500): #Comprobamos en x por arriba
+        #print("Me pase por arriba en x")
+        Mutante[0]=500-(Mutante[0]-500)
+    else:
+        if(Mutante[0]<-500): #Comprobamos x por abajo
+            #print("Me pase por abajo en x")
+            Mutante[0]=-500-(Mutante[0]+500)
+    
+    if (Mutante[1]>500): #Comprobamos en y por arriba
+        #print("Me pase por arriba en y")
+        Mutante[1]=500-(Mutante[1]-500)
+    else:
+        if(Mutante[1]<-500): #Comprobamos y por abajo
+            #print("Me pase por abajo en y")
+            Mutante[1]=-500-(Mutante[1]+500)
+
+
+    return Mutante
+#---------------------------------------------------------------------------
 
