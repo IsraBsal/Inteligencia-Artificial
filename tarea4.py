@@ -74,3 +74,24 @@ def generar_Mutante(p,i,j,k):
     return Mutante
 #----------------------------------------------------------------------------
 
+#Funcion para generar el hijo-----------------------------------
+def GenerarHijo(p,m,Mutante):
+    Hijo=np.zeros((2))
+    Cr=0.5
+    i=random.randint(0,1) #Entrada heredada del mutante 
+    for j in range(2):
+        if(random.uniform(0,1)<Cr):
+            Hijo[j]=Mutante[j]
+        else:
+            Hijo[j]=Mutante[j]
+    Hijo[i]=p[m][j]
+    return Hijo
+#-----------------------------------------------------------------
+
+
+
+
+
+
+
+
