@@ -13,6 +13,14 @@ def funcion_Objetivo(x,y):
     return f
 #-------------------------------------------------------------------------------
 
+#Funcion que recibe un vector con 2 coordenadas
+def funcion_Objetivo2(solucion):
+    x=solucion[0] #a
+    y=solucion[1] #b
+    f=418.9829*2-x*math.sin(math.sqrt(abs(x)))-y*math.sin(math.sqrt(abs(y)))
+    return f
+#------------------------------------------------
+
 #Funcion para rellenar la matriz con las soluciones aleatorias, devuelve una matriz de 13,2
 def generar_Poblacion():
     p=np.zeros((13,2))
@@ -88,7 +96,59 @@ def GenerarHijo(p,m,Mutante):
     return Hijo
 #-----------------------------------------------------------------
 
+#Funcion que devuelve el mejor costo del arreglo de costos
+def mejor_Costo(arr_costo):
+    MejorCosto=arr_costo[0]
 
+    for i in range(13):
+        if(arr_costo[i]<MejorCosto):
+            MejorCosto=arr_costo[i]
+    print("El mejor costo fue: ",MejorCosto)
+#----------------------------------------------------------------
+
+#Funcion que devuelve una lista de randoms diferentes entre si, recibe m ya que esta definido por el ciclo
+def unico(m):
+    L=[m] #este es L[0]
+    i=1
+    while i<4:
+        x=random.randint(0,12)
+        for j in range(0, len(L)):
+            if L[j]==x:
+                break
+        else:
+            L.append(x)
+            i+=1
+    return L
+#--------------------------------------------------------------
+#Main
+
+#Paso 0 Variables
+Ngeneraciones=500
+
+#Paso 1 generar a la poblacion inicial
+p=generar_Poblacion()
+
+#Paso 2 calculamos el costo de cada individuo
+arr_costo=costo_Poblacion(p)
+
+#Comienza la busqueda
+
+for n in range(Ngeneraciones):
+    for m in range(13):
+        #Generar 3 aleatorios diferentes entre si i!=j!=k!=m
+        random_lista=unico(m) 
+        #random[1] es i
+        #random[2] es j
+        #random[3] es k
+        Mutante=generar_Mutante(p,random_lista[1],random_lista[2],random_lista[3]) #(P[i],P[j],P[K])
+        Hijo=GenerarHijo(p,m,Mutante)
+        CostoHijo=funcion_Objetivo2(Hijo)
+        if(CostoHijo<=arr_costo[m]):
+            p[m][0]=Hijo[0]
+            p[m][1]=Hijo[1]
+            arr_costo[m]=CostoHijo
+
+mejor_Costo(arr_costo)
 
 
 
