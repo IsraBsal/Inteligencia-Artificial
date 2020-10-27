@@ -103,7 +103,7 @@ def mejor_Costo(arr_costo):
     for i in range(13):
         if(arr_costo[i]<MejorCosto):
             MejorCosto=arr_costo[i]
-    print("El mejor costo fue: ",MejorCosto)
+    print("El mejor costo fue:",MejorCosto)
 #----------------------------------------------------------------
 
 #Funcion que devuelve una lista de randoms diferentes entre si, recibe m ya que esta definido por el ciclo
@@ -123,7 +123,7 @@ def unico(m):
 #Main
 
 #Paso 0 Variables
-Ngeneraciones=500
+Ngeneraciones=30000
 
 #Paso 1 generar a la poblacion inicial
 p=generar_Poblacion()
@@ -149,7 +149,7 @@ for n in range(Ngeneraciones):
             arr_costo[m]=CostoHijo
 
 mejor_Costo(arr_costo)
-
+print("Tiempo de ejecucion %s seconds" %round((time.time() - start_time),1) ) 
 
 
 

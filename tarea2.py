@@ -58,7 +58,7 @@ def vecindario(SolActual,epsilon): #Refresa un arreglo de tamano 2, contiene las
 
 #Mostramos las coordenadas generadas por SolActual
 #print("Arreglo que contiene las cordenadas de la solucion actual",SolActual)
-epsilon=400
+epsilon=20
 CostoVecina=0
 #Calculamos el costo de SolActual
 CostoActual=funcion_Objetivo(SolActual)
