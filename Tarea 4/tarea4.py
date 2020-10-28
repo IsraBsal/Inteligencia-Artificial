@@ -91,8 +91,8 @@ def GenerarHijo(p,m,Mutante):
         if(random.uniform(0,1)<Cr):
             Hijo[j]=Mutante[j]
         else:
-            Hijo[j]=Mutante[j]
-    Hijo[i]=p[m][j]
+            Hijo[i]=p[m][j]
+    Hijo[i]=Mutante[i] #Garantizando la herencia mutante
     return Hijo
 #-----------------------------------------------------------------
 
